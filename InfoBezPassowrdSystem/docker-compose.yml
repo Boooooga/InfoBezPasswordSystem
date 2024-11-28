@@ -1,0 +1,23 @@
+﻿version: '3.8'
+
+services:
+  web:
+    image: info-bez-password-system
+    build:
+      context: .
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=UsersDB;Username=postgres;Password=83322887655
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 83322887655
+      POSTGRES_DB: UsersDB
+    ports:
+      - "5433:5432"
